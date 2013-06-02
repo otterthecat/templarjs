@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>templar</title>
+  </head>
+  <body>
+    <div class="templar">
+      <h2 data-templar="textContent: title"></h2>
+      <a data-templar="href: url, textContent: name"></a>
+      <p data-templar="textContent: content"></p>
+      <ul data-templar="items">
+        <li data-templar="id: doh,textContent: thing"></li>
+      </ul>
+    </div>
+
+    <script src="src/templar.js"></script>
+    <script>
+
+      var templar = new Templar();
+
+      templar.exec({
+        title: "my fancy title",
+        content: "This is my happening and it freaks me out!",
+        items: [{thing: "one", doh: "blah"}, {thing: 'two', doh: "bleep"}, {thing: 'three', doh: "blurp"}],
+        url: 'http://duckduckgo.com',
+        name: 'stuff'
+      });
+
+    </script>
+  </body>
+</html>
