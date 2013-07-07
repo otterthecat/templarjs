@@ -38,8 +38,11 @@
         // a cloned child node template
         for(var i = 0; i < loop_data.length; i += 1){
 
-          var clone = child_elements[i].cloneNode();
-          var clone_children = clone.querySelectorAll('[data-templar]');
+          // note that cloneNode()'s 'deep' argument is required for all browsers other than firefox
+          // hence it being set to "true" here
+          var clone = child_elements[i].cloneNode(true);
+
+          var clone_children = Array.prototype.slice.call(clone.querySelectorAll('[data-templar]'));
 
           for(var n = 0; n < clone_children.length; n += 1){
 
@@ -76,7 +79,7 @@
 
       exec: function(data_obj){
 
-          var templates = document.querySelectorAll('[data-templar]');
+          var templates = Array.prototype.slice.call(document.querySelectorAll('[data-templar]'));
 
           for(var i = 0; i < templates.length; i += 1){
 
