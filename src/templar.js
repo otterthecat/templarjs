@@ -70,7 +70,6 @@
         element.removeChild(child_elements[0]);
       }
     }
-
   };
 
   var tpl = new Function();
