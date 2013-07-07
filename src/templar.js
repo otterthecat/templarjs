@@ -45,7 +45,16 @@
 
               _run_template(clone_children[n], loop_data[i]);
 
-              clone.appendChild(clone_children[n]);
+              // clone_children[0] will append the original parent element
+              // if there's more than 1 nested element (ie more than 1 array element)
+              // then append the previous child within the parent
+              if(n > 0){
+
+                clone_children[n-1].appendChild(clone_children[n]);
+              } else {
+
+                clone.appendChild(clone_children[n]);
+              }
           }
 
           _run_template(clone, loop_data[i]);
