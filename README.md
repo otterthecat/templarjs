@@ -41,9 +41,9 @@ For instance, for the above example, we want to use this data:
 With this javascript data object we can use it to let Templar JS know how to handle the HTML template:
 
 	var tmpl = new Templar();
-	tmpl.exec(my_data);
+	tmpl.render(my_data);
 
-After the Templar instance executes, your HTML file from the above example will now look like this:
+After the Templar instance renders, your HTML file from the above example will now look like this:
 
 	<!doctype html>
 	<html>
