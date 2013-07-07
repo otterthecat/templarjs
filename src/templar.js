@@ -10,13 +10,13 @@
     // loop through the pairs
     for(var n = 0; n < value_array.length; n += 1){
 
-      // use regex to make new array with 2 elements - 
+      // use regex to make new array with 2 elements -
       // [0] element property key, and [1] property of data_obj
       key_value_array = value_array[n].match(_parsing_regx);
 
       // if we don't get 2 elements back, then (for now)
       // assume that only a property of the data_obj is requested,
-      // athis is a signal to loop through that property's array value
+      // this is a signal to loop through that property's array value
       if(key_value_array.length > 1){
 
         if(element[key_value_array[0]] !== undefined){
@@ -34,17 +34,25 @@
         // helps prevent looping scope errors
         var loop_data = data_obj[key_value_array[0]];
 
-        // each item of the array  applies itself to 
+        // each item of the array  applies itself to
         // a cloned child node template
         for(var i = 0; i < loop_data.length; i += 1){
 
           var clone = child_elements[i].cloneNode();
+          var clone_children = clone.querySelectorAll('[data-templar]');
+
+          for(var n = 0; n < clone_children.length; n += 1){
+
+              _run_template(clone_children[n], loop_data[i]);
+
+              clone.appendChild(clone_children[n]);
+          }
 
           _run_template(clone, loop_data[i]);
 
           element.appendChild(clone);
         }
-        
+
         // clean up template by removing the original child,
         // as it was only used to make clones, and thus never updated direcltly
         element.removeChild(child_elements[0]);
